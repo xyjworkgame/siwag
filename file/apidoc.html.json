@@ -1,0 +1,170 @@
+{
+  "ApiSpecs": [
+    {
+      "HttpVerb": "GET",
+      "Path": "/auth/detail",
+      "Calls": [
+        {
+          "Id": 0,
+          "CurrentPath": "/auth/detail",
+          "MethodType": "GET",
+          "PostForm": null,
+          "RequestHeader": {
+            "Content-Type": " application/json\r",
+            "Postman-Token": " fa783f0b-fe68-41ee-9b2b-f7489529d527\r"
+          },
+          "CommonRequestHeaders": null,
+          "ResponseHeader": {
+            "Content-Type": "application/json; charset=utf-8"
+          },
+          "RequestUrlParams": {
+            "pageNum": "1",
+            "pageSize": "10",
+            "status": "-1"
+          },
+          "RequestBody": "",
+          "ResponseBody": "{\"data\":[{\"id\":3,\"name\":\"Name\",\"cover\":\"cover\",\"href\":\"https://img1.readboy.com/hub/okzm/detail/1.jpg\",\"tags\":\"1121313313\",\"seq_no\":0,\"status\":1}],\"totalSize\":2}",
+          "ResponseCode": 200
+        }
+      ]
+    },
+    {
+      "HttpVerb": "GET",
+      "Path": "/auth/intro",
+      "Calls": [
+        {
+          "Id": 2,
+          "CurrentPath": "/auth/intro",
+          "MethodType": "GET",
+          "PostForm": null,
+          "RequestHeader": {
+            "Content-Type": " application/json\r",
+            "Postman-Token": " d48a176d-3e9a-49a1-a8b3-744277218780\r"
+          },
+          "CommonRequestHeaders": null,
+          "ResponseHeader": {
+            "Content-Type": "application/json; charset=utf-8"
+          },
+          "RequestUrlParams": {
+            "pageNum": "1",
+            "pageSize": "10",
+            "status": "-1"
+          },
+          "RequestBody": "",
+          "ResponseBody": "{\"data\":[{\"id\":11,\"content\":\"34214\",\"status\":1},{\"id\":12,\"content\":\"花见花开\",\"status\":1},{\"id\":13,\"content\":\"123\",\"status\":1},{\"id\":14,\"content\":\"123\",\"status\":1},{\"id\":15,\"content\":\"test content create\",\"status\":1},{\"id\":16,\"content\":\"ceshi_demo1\",\"status\":1},{\"id\":17,\"content\":\"ceshi_demo2\",\"status\":1},{\"id\":18,\"content\":\"ceshi_demo2\",\"status\":1},{\"id\":19,\"content\":\"ceshi_demo1\",\"status\":1},{\"id\":20,\"content\":\"ceshi_demo1\",\"status\":1}],\"totalSize\":17}",
+          "ResponseCode": 200
+        },
+        {
+          "Id": 0,
+          "CurrentPath": "/auth/intro",
+          "MethodType": "GET",
+          "PostForm": null,
+          "RequestHeader": {
+            "Content-Type": " application/json\r",
+            "Postman-Token": " f3599faa-dc10-42f4-9d6e-e75393f08661\r"
+          },
+          "CommonRequestHeaders": null,
+          "ResponseHeader": {
+            "Content-Type": "application/json; charset=utf-8"
+          },
+          "RequestUrlParams": {
+            "pageNum": "10",
+            "pageSize": "10",
+            "status": "-1"
+          },
+          "RequestBody": "",
+          "ResponseBody": "{\"data\":[{\"id\":20,\"content\":\"ceshi_demo1\",\"status\":1},{\"id\":21,\"content\":\"ceshi_demo2\",\"status\":1},{\"id\":22,\"content\":\"ceshi_demo1\",\"status\":1},{\"id\":23,\"content\":\"ceshi_demo1\",\"status\":1},{\"id\":24,\"content\":\"ceshi_demo2\",\"status\":1},{\"id\":25,\"content\":\"434343\",\"status\":1},{\"id\":26,\"content\":\"434343\",\"status\":1}],\"totalSize\":17}",
+          "ResponseCode": 200
+        },
+        {
+          "Id": 1,
+          "CurrentPath": "/auth/intro",
+          "MethodType": "GET",
+          "PostForm": null,
+          "RequestHeader": {
+            "Content-Type": " application/json\r",
+            "Postman-Token": " 9a5132e7-8fa5-4fe8-8ce7-ad02f81deaaa\r"
+          },
+          "CommonRequestHeaders": null,
+          "ResponseHeader": {
+            "Content-Type": "application/json; charset=utf-8"
+          },
+          "RequestUrlParams": {
+            "pageNum": "1",
+            "pageSize": "10",
+            "status": "3"
+          },
+          "RequestBody": "",
+          "ResponseBody": "{\"data\":[],\"totalSize\":0}",
+          "ResponseCode": 200
+        },
+        {
+          "Id": 0,
+          "CurrentPath": "/auth/intro",
+          "MethodType": "GET",
+          "PostForm": null,
+          "RequestHeader": {
+            "Content-Type": " application/json\r",
+            "Postman-Token": " 20313698-4e71-4ee3-935d-bbe91997a53c\r"
+          },
+          "CommonRequestHeaders": null,
+          "ResponseHeader": {
+            "Content-Type": "application/json; charset=utf-8"
+          },
+          "RequestUrlParams": {
+            "pageNum": "1",
+            "pageSize": "10",
+            "status": "3"
+          },
+          "RequestBody": "",
+          "ResponseBody": "{\"data\":\"3 status error\"}{\"data\":[],\"totalSize\":0}",
+          "ResponseCode": 200
+        },
+        {
+          "Id": 0,
+          "CurrentPath": "/auth/intro",
+          "MethodType": "GET",
+          "PostForm": null,
+          "RequestHeader": {
+            "Content-Type": " application/json\r",
+            "Postman-Token": " cf79e516-fe12-4596-9391-a77bc9a3910f\r"
+          },
+          "CommonRequestHeaders": null,
+          "ResponseHeader": {
+            "Content-Type": "application/json; charset=utf-8"
+          },
+          "RequestUrlParams": {
+            "pageNum": "1",
+            "pageSize": "10",
+            "status": "1"
+          },
+          "RequestBody": "",
+          "ResponseBody": "{\"data\":[{\"id\":12,\"content\":\"花见花开\",\"status\":1},{\"id\":13,\"content\":\"123\",\"status\":1},{\"id\":14,\"content\":\"123\",\"status\":1},{\"id\":15,\"content\":\"test content create\",\"status\":1},{\"id\":16,\"content\":\"ceshi_demo1\",\"status\":1},{\"id\":17,\"content\":\"ceshi_demo2\",\"status\":1},{\"id\":18,\"content\":\"ceshi_demo2\",\"status\":1},{\"id\":19,\"content\":\"ceshi_demo1\",\"status\":1},{\"id\":20,\"content\":\"ceshi_demo1\",\"status\":1},{\"id\":21,\"content\":\"ceshi_demo2\",\"status\":1}],\"totalSize\":16}",
+          "ResponseCode": 200
+        },
+        {
+          "Id": 0,
+          "CurrentPath": "/auth/intro",
+          "MethodType": "GET",
+          "PostForm": null,
+          "RequestHeader": {
+            "Content-Type": " application/json\r",
+            "Postman-Token": " 2cf975bd-a47a-4d48-850e-d72c3353b159\r"
+          },
+          "CommonRequestHeaders": null,
+          "ResponseHeader": {
+            "Content-Type": "application/json; charset=utf-8"
+          },
+          "RequestUrlParams": {
+            "pageNum": "1",
+            "pageSize": "10",
+            "status": "3"
+          },
+          "RequestBody": "",
+          "ResponseBody": "{\"data\":\"3 status error\"}",
+          "ResponseCode": 400
+        }
+      ]
+    }
+  ]
+}

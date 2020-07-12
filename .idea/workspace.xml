@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="3b24bf97-6fd9-4df9-b938-1bd1306340ae" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/Firewine.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/httpRequests/2020-07-12T085357.200.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/httpRequests/2020-07-12T085409.200.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/httpRequests/2020-07-12T085410.200.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/httpRequests/2020-07-12T085539.200.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/httpRequests/http-requests-log.http" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/yaagOrSwagger.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/READE.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/file/apidoc.html.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/file/swagger.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/file/swagger.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main1.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/middleware/middleware.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/middleware/response_gin_recorder.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/middleware/responserecorder.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/middleware/siwagmiddleware.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/model/permission.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/model/role.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/model/user.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/siwag/base.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/siwag/config.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/siwag/constants.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/siwag/gin/middleware.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/siwag/models/base.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/siwag/models/paths.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/siwag/models/spec.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/siwag/models/swaggerspec.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/siwag/siwag.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/temp_test.go" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Go File" />
+      </list>
+    </option>
+  </component>
+  <component name="GOROOT" path="D:/Program/GO" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GoLibraries">
+    <option name="indexEntireGoPath" value="false" />
+    <option name="useGoPathFromSystemEnvironment" value="false" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="dummy://restClient/response7.json" root0="SKIP_INSPECTION" />
+  </component>
+  <component name="ProjectId" id="1eV6jqw6OYRaNdHyB2MDOH29Tb7" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+    <option name="showMembers" value="true" />
+    <option name="sortByType" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DefaultGoTemplateProperty" value="Go File" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="add_unversioned_files" value="true" />
+    <property name="configurable.Global.GOPATH.is.expanded" value="true" />
+    <property name="configurable.Module.GOPATH.is.expanded" value="true" />
+    <property name="configurable.Project.GOPATH.is.expanded" value="true" />
+    <property name="go.import.settings.migrated" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.tabs" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\GO\yaagOrSwagger\gin" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\GO\yaagOrSwagger\middleware" />
+    </key>
+  </component>
+  <component name="RestClientSettings">
+    <option name="REQUEST_HISTORY">
+      <list>
+        <RestClientRequest>
+          <option name="httpMethod" value="GET" />
+          <option name="urlBase" value="http://localhost:8080" />
+          <option name="urlPath" value="/json" />
+          <option name="headers">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="Accept" />
+                <option name="value" value="*/*" />
+              </KeyValuePair>
+              <KeyValuePair>
+                <option name="key" value="Cache-Control" />
+                <option name="value" value="no-cache" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="parametersEnabled" value="true" />
+          <option name="textToSend" value="" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Go Test.Test in yaagOrSwaggerDemo">
+    <configuration name="go build yaagOrSwaggerDemo" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="yaagOrSwagger" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="FILE" />
+      <filePath value="$PROJECT_DIR$/main1.go" />
+      <package value="yaagOrSwaggerDemo" />
+      <directory value="$PROJECT_DIR$/" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Test in yaagOrSwaggerDemo" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="yaagOrSwagger" />
+      <working_directory value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <kind value="PACKAGE" />
+      <package value="yaagOrSwaggerDemo" />
+      <directory value="$PROJECT_DIR$/" />
+      <filePath value="$PROJECT_DIR$/" />
+      <pattern value="^Test$" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Go Test.Test in yaagOrSwaggerDemo" />
+        <item itemvalue="Go Build.go build yaagOrSwaggerDemo" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="swagger.json" />
+  </component>
+  <component name="VgoProject">
+    <integration-enabled>true</integration-enabled>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="-14" y="48" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1594479579797">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="-14" y="48" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1600.860@0.0.1600.860" timestamp="1594479579797" />
+    <state x="420" y="0" key="#go_build_yaagOrSwaggerDemo" timestamp="1594558275956">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="420" y="0" key="#go_build_yaagOrSwaggerDemo/0.0.1600.860@0.0.1600.860" timestamp="1594558275956" />
+    <state x="655" y="258" key="EnvironmentVariablesDialog" timestamp="1594394608345">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="655" y="258" key="EnvironmentVariablesDialog/0.0.1600.860@0.0.1600.860" timestamp="1594394608345" />
+    <state x="518" y="126" key="FileChooserDialogImpl" timestamp="1594570957060">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="518" y="126" key="FileChooserDialogImpl/0.0.1600.860@0.0.1600.860" timestamp="1594570957060" />
+    <state width="1547" height="208" key="GridCell.Tab.0.bottom" timestamp="1594569594401">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state width="1547" height="208" key="GridCell.Tab.0.bottom/0.0.1600.860@0.0.1600.860" timestamp="1594569594401" />
+    <state width="1547" height="208" key="GridCell.Tab.0.center" timestamp="1594569594401">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state width="1547" height="208" key="GridCell.Tab.0.center/0.0.1600.860@0.0.1600.860" timestamp="1594569594401" />
+    <state width="1547" height="208" key="GridCell.Tab.0.left" timestamp="1594569594400">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state width="1547" height="208" key="GridCell.Tab.0.left/0.0.1600.860@0.0.1600.860" timestamp="1594569594400" />
+    <state width="1547" height="208" key="GridCell.Tab.0.right" timestamp="1594569594401">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state width="1547" height="208" key="GridCell.Tab.0.right/0.0.1600.860@0.0.1600.860" timestamp="1594569594401" />
+    <state width="1547" height="259" key="GridCell.Tab.1.bottom" timestamp="1594558546512">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state width="1547" height="259" key="GridCell.Tab.1.bottom/0.0.1600.860@0.0.1600.860" timestamp="1594558546512" />
+    <state width="1547" height="259" key="GridCell.Tab.1.center" timestamp="1594558546512">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state width="1547" height="259" key="GridCell.Tab.1.center/0.0.1600.860@0.0.1600.860" timestamp="1594558546512" />
+    <state width="1547" height="259" key="GridCell.Tab.1.left" timestamp="1594558546511">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state width="1547" height="259" key="GridCell.Tab.1.left/0.0.1600.860@0.0.1600.860" timestamp="1594558546511" />
+    <state width="1547" height="259" key="GridCell.Tab.1.right" timestamp="1594558546512">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state width="1547" height="259" key="GridCell.Tab.1.right/0.0.1600.860@0.0.1600.860" timestamp="1594558546512" />
+    <state x="214" y="0" key="SettingsEditor" timestamp="1594558213863">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="214" y="0" key="SettingsEditor/0.0.1600.860@0.0.1600.860" timestamp="1594558213863" />
+    <state x="418" y="98" width="763" height="664" key="find.popup" timestamp="1594561101765">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="418" y="98" width="763" height="664" key="find.popup/0.0.1600.860@0.0.1600.860" timestamp="1594561101765" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/main1.go</url>
+          <line>24</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/main1.go</url>
+          <line>25</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/main1.go</url>
+          <line>26</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="GoApplicationRunConfiguration">
+        <watch expression="apiCall" language="go" />
+      </configuration>
+    </watches-manager>
+  </component>
+</project>

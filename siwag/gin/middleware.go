@@ -5,8 +5,6 @@ import (
 	"github.com/gin-gonic/gin"
 	"log"
 	"strings"
-	"yaagOrSwaggerDemo/middleware"
-	model "yaagOrSwaggerDemo/siwag/models"
 )
 
 /*
@@ -20,8 +18,6 @@ import (
 func Document() gin.HandlerFunc {
 	return func(c *gin.Context) {
 
-		swaggerCall := model.SwaggerSpec{}
-		middleware.Before(&swaggerCall, c.Request)
 		c.Next()
 		if yaag.IsStatusCodeValid(c.Writer.Status()) {
 

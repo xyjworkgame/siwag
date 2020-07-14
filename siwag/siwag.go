@@ -26,25 +26,21 @@ func Init(conf *Config) {
 	Contact.Name = config.Author
 	InfoBasic.Title = config.DocTitle
 	InfoBasic.Description = config.Description
-	//TODO 这里要进行添加modal
 	// create file json
 	filePath, err := filepath.Abs(conf.DocPath + ".json")
 	dataFile, err := os.Open(filePath)
 	defer dataFile.Close()
 	if err == nil {
 		json.NewDecoder(io.Reader(dataFile)).Decode(&InitInfo)
-		generateJson()
+		//generateJson()
 	}
 
 }
 
-func generateJson() {
-
-}
 
 // reflect scan model
 func AutoCreateJson(values ...interface{}) {
-	definitions := make(map[string]models.Definitions)
+	definitions := make(map[string]*models.Definitions)
 	for _, value := range values {
 
 		refValue := reflect.ValueOf(value) // value
@@ -73,7 +69,7 @@ func AutoCreateJson(values ...interface{}) {
 		definition.Xml = map[string]string{
 			"name" :structName,
 		}
-		definitions[structName] = definition
+		definitions[structName] = &definition
 	}
 	InitInfo.Definitions = definitions
 }

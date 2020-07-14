@@ -3,6 +3,7 @@ package siwag
 import (
 	"encoding/json"
 	"io"
+	"log"
 	"os"
 	"path/filepath"
 	"reflect"
@@ -10,6 +11,9 @@ import (
 )
 
 var config *Config
+func IsOn() bool {
+	return config.IsOn
+}
 
 // add config
 // example : models
@@ -17,7 +21,7 @@ var config *Config
 func Init(conf *Config) {
 	config = conf
 	if conf.DocPath == "" {
-		conf.DocPath = "./api/apiSwagger.json"
+		conf.DocPath = "apiSwagger"
 	}
 	// add custom info
 	InitInfo.Host = config.Host
@@ -27,17 +31,26 @@ func Init(conf *Config) {
 	InfoBasic.Title = config.DocTitle
 	InfoBasic.Description = config.Description
 	// create file json
+	//filePath, err := filepath.Abs(conf.DocPath + ".json")
 	filePath, err := filepath.Abs(conf.DocPath + ".json")
 	dataFile, err := os.Open(filePath)
 	defer dataFile.Close()
 	if err == nil {
-		json.NewDecoder(io.Reader(dataFile)).Decode(&InitInfo)
-		//generateJson()
+		log.Println(dataFile)
+		log.Println(InitInfo)
+		json.NewDecoder(io.Reader(dataFile)).Decode(InitInfo)
+		//generateHtml()
 	}
 
 }
 
-
+func IsStatusCodeValid(code int) bool  {
+	if code >= 200 && code < 500 {
+		return true
+	} else {
+		return false
+	}
+}
 // reflect scan model
 func AutoCreateJson(values ...interface{}) {
 	definitions := make(map[string]*models.Definitions)
@@ -72,4 +85,9 @@ func AutoCreateJson(values ...interface{}) {
 		definitions[structName] = &definition
 	}
 	InitInfo.Definitions = definitions
+}
+
+// 生成json
+func GenerateJson(*models.Base) {
+
 }

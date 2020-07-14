@@ -11,19 +11,19 @@ import (
 func main() {
 
 	config := siwag.Config{
-		IsOn: true,
+		IsOn:     true,
 		DocTitle: "Gin",
-		DocPath: "apidoc.json",
-		Author: "demo",
-		Email: "1111@163.com",
-		Host: "172.0.0.1",
+		DocPath:  "apidoc",
+		Author:   "demo",
+		Email:    "1111@163.com",
+		Host:     "172.0.0.1",
 		BasePath: "/",
-		}
-
+	}
+	//add model
+	siwag.AutoCreateJson(model.User{}, model.Permission{})
 	//	init config file
 	siwag.Init(&config)
-	//add model
-	siwag.AutoCreateJson(&model.User{},model.Permission{})
+
 
 	r := gin.Default()
 	// 调用中间件

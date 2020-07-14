@@ -12,7 +12,7 @@ type Base struct {
 	BasePath            string
 	Tags                *Tags
 	Schemes             []string
-	Paths               map[string]Paths
+	Paths               Paths
 	SecurityDefinitions *spec.SecuritySchemeProps //这里不进行自动添加
 	Definitions         map[string]*Definitions
 }

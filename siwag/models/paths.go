@@ -4,8 +4,8 @@ import "github.com/go-openapi/spec"
 
 // Paths 是一个字典，里面是每一个json
 // 尝试查看调用方法，反射url路径
-type Paths map[string]Path
-
+type Paths map[string]PathItems
+type PathItems map[string]Path
 // Path 是一个字典，url -》 {}
 type Path struct {
 	Description string   // 描述

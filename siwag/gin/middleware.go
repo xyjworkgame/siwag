@@ -4,8 +4,8 @@ import (
 	"github.com/gin-gonic/gin"
 	"log"
 	"strings"
-	"yaagOrSwaggerDemo/middleware"
 	"yaagOrSwaggerDemo/siwag"
+	middleware "yaagOrSwaggerDemo/siwag/gin/middleware"
 	model "yaagOrSwaggerDemo/siwag/models"
 )
 
@@ -22,15 +22,15 @@ func Document() gin.HandlerFunc {
 		if !siwag.IsOn() {
 			return
 		}
-		var siwagCalls model.Paths
+		siwagCalls := model.Paths{}
 
-		var siwagCallItems model.PathItems
+		siwagCallItems:= model.PathItems{}
 
 		siwagCall := model.Path{}
-		middleware.Before(&siwagCall, c.Request)
 
+		middleware.Before(&siwagCall, c)
 		c.Next()
-
+		middleware.After(&siwagCall,c)
 		// 获取响应的数据
 		if siwag.IsStatusCodeValid(c.Writer.Status()) {
 
@@ -44,7 +44,7 @@ func Document() gin.HandlerFunc {
 			// 获取请求后的一些信息
 			// 设置url 为key
 			siwagCallItems[c.Request.Method] = siwagCall
-			siwagCalls[c.Request.URL.String()] = siwagCallItems
+			siwagCalls[c.FullPath()] = siwagCallItems
 			// 存储文件里面
 			siwag.InitInfo.Paths = siwagCalls
 			go siwag.GenerateJson(&siwag.InitInfo)

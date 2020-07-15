@@ -1,6 +1,8 @@
 package models
 
-import "github.com/go-openapi/spec"
+import (
+	"github.com/go-openapi/spec"
+)
 
 // Paths 是一个字典，里面是每一个json
 // 尝试查看调用方法，反射url路径
@@ -24,11 +26,15 @@ type Parameter struct {
 	Description     string
 	Name            string
 	In              string
+	Type 			string
 	Required        bool
-	Schema          *spec.Schema //关于spec 全部 手动输入，
+	Schema          *Schema //关于spec 全部 手动输入，
 	AllowEmptyValue bool
 }
-
+type Schema struct {
+	Type string
+	Item *spec.Items
+}
 type Responses struct {
 	Default            *Response
 	StatusCodeResponse map[int]Response

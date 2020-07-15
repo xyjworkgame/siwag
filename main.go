@@ -31,8 +31,9 @@ func main() {
 	r.GET("/json", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{"result": "Hello World!"})
 	})
-	r.GET("/plain", func(c *gin.Context) {
-		c.String(http.StatusOK, "Hello World!")
+	r.POST("/json", func(c *gin.Context) {
+		form := c.PostForm("cesa")
+		c.String(http.StatusOK, form)
 	})
 	r.GET("/xml", func(c *gin.Context) {
 		c.XML(http.StatusOK, gin.H{"result": "Hello World!"})
@@ -41,5 +42,5 @@ func main() {
 		value := c.Query("key")
 		c.JSON(http.StatusOK, gin.H{"value": value})
 	})
-	r.Run(":8081")
+	r.Run(":8080")
 }

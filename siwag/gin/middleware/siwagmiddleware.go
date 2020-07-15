@@ -16,8 +16,23 @@ import (
 @Software: GoLand
 @Description:
 */
-func After(siwagCall *model.Path,c *gin.Context){
+func After(siwagCall *model.Path, c *gin.Context) {
 
+	// 3. 判断body 里面的参数数据  ,应该在after里面，next前面无法获取到
+	bodyResult := ReadBodyParams(c)
+	for k, v := range bodyResult {
+		parameter := model.Parameter{}
+		parameter.Name = k
+		parameter.In = "path"
+		parameter.Required = true
+		parameter.Type = reflect.ValueOf(v).String()
+		log.Println(parameter.Type)
+
+		siwagCall.Parameters = append(siwagCall.Parameters, parameter)
+	}
+	siwagCall.Consumes = []string{
+		c.Request.Header.Get("Content-Type"),
+	}
 }
 func Before(siwagCall *model.Path, c *gin.Context) {
 	/*
@@ -38,7 +53,7 @@ func Before(siwagCall *model.Path, c *gin.Context) {
 	queryResult := ReadQueryParams(c.Request)
 	// 遍历添加数据
 	for k, v := range queryResult {
-		var parameter model.Parameter
+		parameter := model.Parameter{}
 		parameter.Name = k
 		parameter.In = "query"
 		parameter.Required = true
@@ -51,27 +66,26 @@ func Before(siwagCall *model.Path, c *gin.Context) {
 
 	// 2. 判断path 路径上面的参数 ,path 参数在context 里面，这里没法写
 	pathResult := ReadPathParams(c)
-	for k,v := range pathResult{
-		var parameter model.Parameter
+	for k, v := range pathResult {
+		parameter := model.Parameter{}
 		parameter.Name = k
 		parameter.In = "path"
-		parameter.Required= true
+		parameter.Required = true
 		parameter.Type = reflect.ValueOf(v).String()
 		log.Println(parameter.Type)
 
-		siwagCall.Parameters = append(siwagCall.Parameters,parameter)
+		siwagCall.Parameters = append(siwagCall.Parameters, parameter)
 	}
-	// 3. 判断body 里面的参数数据  ,应该在after里面，next前面无法获取到
-	//bodyResult := ReadBodyParams(c)
-	//fmt.Println(bodyResult)
+
 
 }
 
 func ReadBodyParams(c *gin.Context) map[string]string {
 	forms := c.Request.Form
 	results := map[string]string{}
-	for k,v := range forms{
-		log.Println(k,v)
+	for k, v := range forms {
+		results[k] = v[0]
+
 	}
 	return results
 }
@@ -80,7 +94,7 @@ func ReadPathParams(c *gin.Context) map[string]string {
 
 	results := map[string]string{}
 	params := c.Params // path上面的参数
-	for _,v := range params{
+	for _, v := range params {
 		results[v.Key] = v.Value
 
 	}

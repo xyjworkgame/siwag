@@ -6,12 +6,13 @@ import (
 )
 
 // Initial empty spec
-var InitInfo model.Base
+var InitInfo  model.Base
 var Contact spec.ContactInfo
 var InfoBasic spec.InfoProps
 
 // Initial Basics spec
 func init() {
+
 	Contact = spec.ContactInfo{
 		Name:  "",
 		Email: "",
@@ -35,7 +36,7 @@ func init() {
 		//Tags: TODO 1. 自动根据path抽取，或者手动添加
 		//Schemes: spec.Schema{}  TODO 暂时不写
 		//SecurityDefinitions:  TODO 暂时不写
-		//Definitions: TODO 这里采用反射，加入model
+		//Definitions:
 		//ExternalDocs: TODO 暂时不写
 	}
 }

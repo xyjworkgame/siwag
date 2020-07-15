@@ -2,8 +2,6 @@ package gin
 
 import (
 	"github.com/gin-gonic/gin"
-	"log"
-	"strings"
 	"yaagOrSwaggerDemo/siwag"
 	middleware "yaagOrSwaggerDemo/siwag/gin/middleware"
 	model "yaagOrSwaggerDemo/siwag/models"
@@ -22,31 +20,34 @@ func Document() gin.HandlerFunc {
 		if !siwag.IsOn() {
 			return
 		}
-		siwagCalls := model.Paths{}
-
-		siwagCallItems:= model.PathItems{}
-
-		siwagCall := model.Path{}
-
-		middleware.Before(&siwagCall, c)
+		siwagPaths := model.Paths{}
+		siwagPathItems:= model.PathItems{}
+		siwagPath := model.Path{}
+		siwagResponses := model.Responses{}
+		//siwagResponse := model.Response{}
+		middleware.Before(&siwagPath, c)
 		c.Next()
-		middleware.After(&siwagCall,c)
+		middleware.After(&siwagPath,c)
 		// 获取响应的数据
 		if siwag.IsStatusCodeValid(c.Writer.Status()) {
 
-			headers := map[string]string{}
-			for k, v := range c.Writer.Header() {
-				log.Println(k, v)
-				headers[k] = strings.Join(v, " ")
+			//headers := map[string]string{}
+			//for k, v := range c.Writer.Header() {
+			//	log.Println(k, v)
+			//	headers[k] = strings.Join(v, " ")
+			//}
+			siwagPath.Produces = []string{
+				"application/json",
+			}
+			siwagResponses.StatusCodeResponse = map[int]model.Response{
+				c.Writer.Status(): model.Response{},
 			}
 
-			// 填补数据(没请求一个，就写入文件里面)
-			// 获取请求后的一些信息
-			// 设置url 为key
-			siwagCallItems[c.Request.Method] = siwagCall
-			siwagCalls[c.FullPath()] = siwagCallItems
+			siwagPath.Response = &siwagResponses
+			siwagPathItems[c.Request.Method] = siwagPath
+			siwagPaths[c.FullPath()] = siwagPathItems
 			// 存储文件里面
-			siwag.InitInfo.Paths = siwagCalls
+			siwag.InitInfo.Paths = siwagPaths
 			go siwag.GenerateJson(&siwag.InitInfo)
 		}
 

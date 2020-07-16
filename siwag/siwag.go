@@ -2,7 +2,6 @@ package siwag
 
 import (
 	"encoding/json"
-	"fmt"
 	"io"
 	"io/ioutil"
 	"log"
@@ -10,6 +9,7 @@ import (
 	"path/filepath"
 	"reflect"
 	"yaagOrSwaggerDemo/siwag/models"
+	"yaagOrSwaggerDemo/util"
 )
 
 var config *Config
@@ -39,8 +39,8 @@ func Init(conf *Config) {
 	dataFile, err := os.Open(filePath)
 	defer dataFile.Close()
 	if err == nil {
-		log.Println(dataFile)
-		log.Println(InitInfo)
+		//log.Println(dataFile)
+		//log.Println(InitInfo)
 		json.NewDecoder(io.Reader(dataFile)).Decode(InitInfo)
 		//generateHtml()
 	}
@@ -93,38 +93,146 @@ func AutoCreateJson(values ...interface{}) {
 // 生成json
 func GenerateJson(InitInfo *models.Base) {
 
-	//	TODO 如何续传生成json文件
-
-
-	//	3. 如何去替换更新数据，然后再存储到里面去
 	// FIXME 尝试续上
-	//	1. 首先判断，是否存在这个文件
-	filePath, err := filepath.Abs(config.DocPath)
-	if _, err := os.Stat(filePath); err != nil {
+
+	filePath, err := filepath.Abs(config.DocPath + ".json")
+	if err != nil {
 		log.Println(err)
 		return
-	} else {
-		dataFile, err := os.Create(filePath + ".json")
+	}
+	//	1. 首先判断，是否存在这个文件
+	exist := util.IsFileExist(filePath)
+
+	// 文件不存在
+	if !exist {
+		dataFile, err := os.Create(filePath)
 		if err != nil {
 			log.Println(err)
 			return
 		}
+		//	2. 如果不存在，打开文件并且将json写入文件中
+		marshal, err := json.Marshal(InitInfo)
+		if err != nil {
+			log.Println(err)
+			return
+		}
+		//fmt.Println(marshal)
+		defer dataFile.Close()
+		_, err = dataFile.Write(marshal)
+		if err != nil {
+			log.Println(err)
+			return
+		}
+		return
+	}
+	//文件存在
+	//	2. 如果存在文件，读取文件中已经存在的数据，
+	initInfo := models.Base{}
+	fileContent, err := os.OpenFile(filePath, os.O_RDWR, 6)
+	fileData, err := ioutil.ReadAll(fileContent)
+	if err != nil {
+		log.Println(err)
+		return
+	}
+	defer fileContent.Close()
+	//	3. 如何去替换更新数据，然后再存储到里面去
+	if err := json.Unmarshal([]byte(fileData), &initInfo); err != nil {
+		log.Println(err)
+		return
 	}
 
-	//	2. 如果存在文件，读取文件中已经存在的数据，
-	FileData, err := ioutil.ReadAll(dataFile)
-	json.Unmarshal()
-	fmt.Println(dataFile)
+
+
+	compareInitInfo(InitInfo, &initInfo)
+	dataFile, err := os.Create(filePath)
+	defer dataFile.Close()
 	marshal, err := json.Marshal(InitInfo)
 	if err != nil {
 		log.Println(err)
 		return
 	}
-	//fmt.Println(marshal)
-	defer dataFile.Close()
-	_, err = dataFile.Write(marshal)
-	if err != nil {
+	//fileContent.Truncate()
+	// 移动指针
+	//_, _ = fileContent.Seek(0, 0)
+	//fileContent.Truncate(-1)
+	if _, err = dataFile.Write(marshal); err != nil {
 		log.Println(err)
 		return
 	}
+
+	log.Println("finish record")
+}
+
+func compareInitInfo(nInfo *models.Base, oInfo *models.Base) {
+	//oldInfo.Paths
+	//oldInfo.Definitions
+	//	 需要替换的上面两个
+	// 以新的为主，旧的为参考
+
+	for pathItemsk, pathItemsv := range oInfo.Paths {
+		if _, ok := nInfo.Paths[pathItemsk]; ok {
+			//	 path -url 存在
+			for pathk,pathv := range pathItemsv{
+				if _,ok := nInfo.Paths[pathItemsk][pathk];ok{
+					// path -url - method 存在
+					// compare parameter
+					parameters := compareParameters(nInfo.Paths[pathItemsk][pathk].Parameters,pathv.Parameters)
+					//nInfo.Paths[pathItemsk][pathk].Parameters = parameters
+					log.Println(parameters)
+					// FIXME 为了map值的正确，go语言不允许直接修改map中的值类型结构。
+					// 怎么可以让这句话，添加一个伪遍历
+					for k,_ := range nInfo.Paths{
+						if k == pathItemsk{
+							for _,v1 := range nInfo.Paths[pathItemsk]{
+								v1.Parameters = parameters
+							}
+						}
+					}
+					// response
+					for resk, resv := range oInfo.Paths[pathItemsk][pathk].Response.StatusCodeResponse {
+						//	2. 判断response
+						if _, ok := pathv.Response.StatusCodeResponse[resk]; ok {
+						} else {
+							//	不相同的则添加
+							pathv.Response.StatusCodeResponse[resk] = resv
+						}
+					}
+				}else {
+					nInfo.Paths[pathItemsk][pathk] = pathItemsv[pathk]
+				}
+			}
+		} else {
+			//	path-url 不存在，直接添加
+			nInfo.Paths[pathItemsk] = oInfo.Paths[pathItemsk]
+		}
+	}
+}
+
+
+
+
+
+
+func compareParameters(parameters models.Parameters, oldP models.Parameters) []models.Parameter {
+	var result []models.Parameter
+	nameMap := map[string]models.Parameter{}
+	for _, v := range parameters {
+		if _, ok := nameMap[v.Name]; !ok {
+			//	name存在，
+			//	result = append(result, v)
+			nameMap[v.Name] = v
+		}
+
+	}
+	for _, v := range oldP {
+		if _, ok := nameMap[v.Name]; !ok {
+			//	如果没有，则设置required
+			v.Required = false
+			nameMap[v.Name] = v
+		}
+	}
+	for _, v := range nameMap {
+		result = append(result, v)
+	}
+	return result
 }

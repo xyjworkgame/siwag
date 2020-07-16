@@ -1,7 +1,9 @@
 package gin
 
 import (
+	"bytes"
 	"github.com/gin-gonic/gin"
+	"strings"
 	"yaagOrSwaggerDemo/siwag"
 	middleware "yaagOrSwaggerDemo/siwag/gin/middleware"
 	model "yaagOrSwaggerDemo/siwag/models"
@@ -21,13 +23,15 @@ func Document() gin.HandlerFunc {
 			return
 		}
 		siwagPaths := model.Paths{}
-		siwagPathItems:= model.PathItems{}
+		siwagPathItems := model.PathItems{}
 		siwagPath := model.Path{}
 		siwagResponses := model.Responses{}
 		//siwagResponse := model.Response{}
 		middleware.Before(&siwagPath, c)
+		blw := &bodyLogWriter{body: bytes.NewBufferString(""), ResponseWriter: c.Writer}
+		c.Writer = blw
 		c.Next()
-		middleware.After(&siwagPath,c)
+		middleware.After(&siwagPath, c)
 		// 获取响应的数据
 		if siwag.IsStatusCodeValid(c.Writer.Status()) {
 
@@ -40,16 +44,60 @@ func Document() gin.HandlerFunc {
 				"application/json",
 			}
 			siwagResponses.StatusCodeResponse = map[int]model.Response{
-				c.Writer.Status(): model.Response{},
+				c.Writer.Status(): model.Response{
+					Examples: blw.body.String(),
+				},
+
 			}
 
+
 			siwagPath.Response = &siwagResponses
+			if c.FullPath() ==""{
+				siwagPath.ID = strings.Replace(c.Request.URL.Path,"/","",10)
+			}else {
+				siwagPath.ID = strings.Replace(c.FullPath(),"/","",10)
+			}
 			siwagPathItems[c.Request.Method] = siwagPath
-			siwagPaths[c.FullPath()] = siwagPathItems
+
+			if c.FullPath() == "" {
+				siwagPaths[c.Request.URL.Path] = siwagPathItems
+
+			} else {
+				siwagPaths[c.FullPath()] = siwagPathItems
+
+			}
+
 			// 存储文件里面
 			siwag.InitInfo.Paths = siwagPaths
 			go siwag.GenerateJson(&siwag.InitInfo)
 		}
 
 	}
+}
+type bodyLogWriter struct {
+	gin.ResponseWriter
+	body *bytes.Buffer
+}
+
+func (w bodyLogWriter) Write(b []byte) (int, error) {
+	w.body.Write(b)
+	return w.ResponseWriter.Write(b)
+}
+
+func GinBodyLogMiddleware(c *gin.Context) string {
+	blw := &bodyLogWriter{body: bytes.NewBufferString(""), ResponseWriter: c.Writer}
+	c.Writer = blw
+	c.Next()
+	//statusCode := c.Writer.Status()
+	//if statusCode >= 200 {
+	//	//ok this is an request with error, let's make a record for it
+	//	// now print body (or log in your preferred way)
+	//	fmt.Println("Response body: " + blw.body.String())
+	//}
+	return blw.body.String()
+}
+
+func (w bodyLogWriter) WriteString(s string) (int, error) {
+	w.body.WriteString(s)
+	return w.ResponseWriter.WriteString(s)
 }

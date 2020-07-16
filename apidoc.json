@@ -1,0 +1,135 @@
+{
+  "Swagger": "2.0",
+  "Info": {
+    "description": "you think this info",
+    "title": "you think this title",
+    "contact": {
+      "name": "demo",
+      "email": "1111@163.com"
+    },
+    "version": "1.0.0"
+  },
+  "Host": "172.0.0.1",
+  "BasePath": "/",
+  "Tags": null,
+  "Schemes": null,
+  "Paths": {
+    "/json": {
+      "GET": {
+        "Description": "",
+        "Consumes": [
+          "application/json"
+        ],
+        "Produces": [
+          "application/json"
+        ],
+        "Schemes": null,
+        "Tags": null,
+        "Summary": "",
+        "ID": "json",
+        "Deprecated": false,
+        "Parameters": [
+          {
+            "Description": "",
+            "Name": "cesa",
+            "In": "body",
+            "Type": "float64",
+            "Required": true,
+            "Schema": null,
+            "AllowEmptyValue": false
+          }
+        ],
+        "Response": {
+          "Default": null,
+          "StatusCodeResponse": {
+            "200": {
+              "Description": "",
+              "Schema": null,
+              "Headers": null,
+              "Examples": "{\"result\":\"Hello World!\"}"
+            }
+          }
+        }
+      },
+      "POST": {
+        "Description": "",
+        "Consumes": [
+          "application/json"
+        ],
+        "Produces": [
+          "application/json"
+        ],
+        "Schemes": null,
+        "Tags": null,
+        "Summary": "",
+        "ID": "json",
+        "Deprecated": false,
+        "Parameters": [
+          {
+            "Description": "",
+            "Name": "cesa",
+            "In": "body",
+            "Type": "float64",
+            "Required": true,
+            "Schema": null,
+            "AllowEmptyValue": false
+          }
+        ],
+        "Response": {
+          "Default": null,
+          "StatusCodeResponse": {
+            "200": {
+              "Description": "",
+              "Schema": null,
+              "Headers": null,
+              "Examples": ""
+            }
+          }
+        }
+      }
+    }
+  },
+  "SecurityDefinitions": null,
+  "Definitions": {
+    "Permission": {
+      "Type": "object",
+      "Xml": {
+        "name": "Permission"
+      },
+      "Properties": {
+        "id": {
+          "type": "int"
+        },
+        "name": {
+          "type": "string"
+        },
+        "pid": {
+          "type": "int8"
+        },
+        "url": {
+          "type": "string"
+        }
+      }
+    },
+    "User": {
+      "Type": "object",
+      "Xml": {
+        "name": "User"
+      },
+      "Properties": {
+        "grade": {
+          "type": "int8"
+        },
+        "id": {
+          "type": "int"
+        },
+        "password": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

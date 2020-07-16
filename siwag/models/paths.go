@@ -8,6 +8,7 @@ import (
 // 尝试查看调用方法，反射url路径
 type Paths map[string]PathItems
 type PathItems map[string]Path
+type Parameters []Parameter
 // Path 是一个字典，url -》 {}
 type Path struct {
 	Description string   // 描述
@@ -18,7 +19,7 @@ type Path struct {
 	Summary     string
 	ID          string
 	Deprecated  bool
-	Parameters  []Parameter
+	Parameters  Parameters
 	Response    *Responses
 }
 
@@ -26,7 +27,7 @@ type Parameter struct {
 	Description     string
 	Name            string
 	In              string
-	Type 			string
+	Type            string
 	Required        bool
 	Schema          *Schema //关于spec 全部 手动输入，
 	AllowEmptyValue bool
@@ -34,6 +35,7 @@ type Parameter struct {
 type Schema struct {
 	Type string
 	Item *spec.Items
+	Example string
 }
 type Responses struct {
 	Default            *Response
@@ -44,4 +46,5 @@ type Response struct {
 	Description string
 	Schema      *spec.Schema
 	Headers     map[string]string
+	Examples    string
 }

@@ -155,6 +155,7 @@ func GenerateJson(InitInfo *models.Base) {
 	// 移动指针
 	//_, _ = fileContent.Seek(0, 0)
 	//fileContent.Truncate(-1)
+	//lower := strings.ToLower(string(marshal))
 	if _, err = dataFile.Write(marshal); err != nil {
 		log.Println(err)
 		return
@@ -189,12 +190,12 @@ func compareInitInfo(nInfo *models.Base, oInfo *models.Base) {
 						}
 					}
 					// response
-					for resk, resv := range oInfo.Paths[pathItemsk][pathk].Response.StatusCodeResponse {
+					for resk, resv := range oInfo.Paths[pathItemsk][pathk].Responses {
 						//	2. 判断response
-						if _, ok := pathv.Response.StatusCodeResponse[resk]; ok {
+						if _, ok := pathv.Responses[resk]; ok {
 						} else {
 							//	不相同的则添加
-							pathv.Response.StatusCodeResponse[resk] = resv
+							pathv.Responses[resk] = resv
 						}
 					}
 				}else {
@@ -217,18 +218,38 @@ func compareParameters(parameters models.Parameters, oldP models.Parameters) []m
 	var result []models.Parameter
 	nameMap := map[string]models.Parameter{}
 	for _, v := range parameters {
-		if _, ok := nameMap[v.Name]; !ok {
+		if _, ok := nameMap[v.BodyParameter.Name]; !ok {
 			//	name存在，
 			//	result = append(result, v)
-			nameMap[v.Name] = v
+			nameMap[v.BodyParameter.Name] = v
 		}
 
 	}
 	for _, v := range oldP {
-		if _, ok := nameMap[v.Name]; !ok {
+		if _, ok := nameMap[v.BodyParameter.Name]; !ok {
 			//	如果没有，则设置required
-			v.Required = false
-			nameMap[v.Name] = v
+			v.BodyParameter.Required = false
+			nameMap[v.BodyParameter.Name] = v
+		}
+	}
+	for _, v := range nameMap {
+		result = append(result, v)
+	}
+
+	// query
+	for _, v := range parameters {
+		if _, ok := nameMap[v.QueryParameter.Name]; !ok {
+			//	name存在，
+			//	result = append(result, v)
+			nameMap[v.QueryParameter.Name] = v
+		}
+
+	}
+	for _, v := range oldP {
+		if _, ok := nameMap[v.QueryParameter.Name]; !ok {
+			//	如果没有，则设置required
+			v.QueryParameter.Required = false
+			nameMap[v.QueryParameter.Name] = v
 		}
 	}
 	for _, v := range nameMap {

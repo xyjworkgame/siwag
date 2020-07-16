@@ -36,17 +36,18 @@ func After(siwagCall *model.Path, c *gin.Context) {
 		case "application/json, application/x-www-form-urlencoded":
 			log.Println("Reading form")
 			bodyResult := ReadBodyParams(c)
-			for k, v := range bodyResult {
+			for k, _ := range bodyResult {
 				parameter := model.Parameter{}
-				parameter.Name = k
-				parameter.In = "path"
-				parameter.Required = true
-				parameter.Type = reflect.TypeOf(v).String()
+				parameter.BodyParameter.Name = k
+				parameter.BodyParameter.Name = k
+				parameter.BodyParameter.In = "path"
+				parameter.BodyParameter.Required = true
 				jsonStr, _ := json.Marshal(bodyResult)
-				parameter.Schema.Example = string(jsonStr)
+				parameter.BodyParameter.Description = string(jsonStr)
 				//log.Println(parameter.Type)
 
 				siwagCall.Parameters = append(siwagCall.Parameters, parameter)
+
 			}
 		case "application/json":
 			log.Println("Reading body")
@@ -57,21 +58,19 @@ func After(siwagCall *model.Path, c *gin.Context) {
 				log.Println(err)
 				return
 			}
-			for k, v := range mapResult {
+			for k, _ := range mapResult {
 				parameter := model.Parameter{}
-				parameter.In = "body"
-				parameter.Required = true
-				parameter.Name = k
-				parameter.Type = reflect.TypeOf(v).String()
-
+				parameter.BodyParameter.In = "body"
+				parameter.BodyParameter.Required = true
+				parameter.BodyParameter.Name = k
+				//parameter.BodyParameter.Type = reflect.TypeOf(v).String()
+				//parameter.BodyParameter.Description =
 				siwagCall.Parameters = append(siwagCall.Parameters, parameter)
 			}
 
 		default:
 			if strings.Contains(ct, "multipart/form-data") {
-
 				handleMultipart(siwagCall, c.Request)
-
 			} else {
 				log.Println("Reading body")
 				log.Println(*middleware.ReadBody(c.Request))
@@ -93,14 +92,15 @@ func Before(siwagCall *model.Path, c *gin.Context) {
 	// 遍历添加数据
 	for k, v := range queryResult {
 		parameter := model.Parameter{}
-		parameter.Name = k
-		parameter.In = "query"
-		parameter.Required = true
+		parameter.QueryParameter.Name = k
+		parameter.QueryParameter.In = "query"
+		parameter.QueryParameter.Required = true
 		//	TODO 这里有可能无法实现添加参数类型，因为得到的都是字符串，除非通过转换切换
 		//log.Println(reflect.ValueOf(v).String())
 		parameter.Type = reflect.TypeOf(v).String()
 		jsonStr, _ := json.Marshal(queryResult)
-		parameter.Schema.Example = string(jsonStr)
+		parameter.QueryParameter.Description = string(jsonStr)
+
 		// 添加进去
 		siwagCall.Parameters = append(siwagCall.Parameters, parameter)
 	}
@@ -109,9 +109,9 @@ func Before(siwagCall *model.Path, c *gin.Context) {
 	pathResult := ReadPathParams(c)
 	for k, v := range pathResult {
 		parameter := model.Parameter{}
-		parameter.Name = k
-		parameter.In = "path"
-		parameter.Required = true
+		parameter.QueryParameter.Name = k
+		parameter.QueryParameter.In = "path"
+		parameter.QueryParameter.Required = true
 		parameter.Type = reflect.ValueOf(v).String()
 		//log.Println(parameter.Type)
 
@@ -156,7 +156,6 @@ func ReadQueryParams(req *http.Request) map[string]string {
 	return params
 }
 
-
 func handleMultipart(siwagCall *model.Path, req *http.Request) {
 
 	if err := req.ParseMultipartForm(MaxInMemoryMultipartSize); err != nil {
@@ -167,15 +166,9 @@ func handleMultipart(siwagCall *model.Path, req *http.Request) {
 	for k, _ := range postForm {
 		parameter := model.Parameter{}
 
-		parameter.Name = k
-		parameter.Required = true
-		parameter.In = "body"
-
-		//jsonStr, _ := json.Marshal(map[string]string{
-		//	k:v,
-		//})
-		//parameter.Schema.Example = ""
-
+		parameter.BodyParameter.Name = k
+		parameter.BodyParameter.Required = true
+		parameter.BodyParameter.In = "body"
 		siwagCall.Parameters = append(siwagCall.Parameters, parameter)
 	}
 

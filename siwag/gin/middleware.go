@@ -25,7 +25,6 @@ func Document() gin.HandlerFunc {
 		siwagPaths := model.Paths{}
 		siwagPathItems := model.PathItems{}
 		siwagPath := model.Path{}
-		siwagResponses := model.Responses{}
 		//siwagResponse := model.Response{}
 		middleware.Before(&siwagPath, c)
 		blw := &bodyLogWriter{body: bytes.NewBufferString(""), ResponseWriter: c.Writer}
@@ -34,30 +33,27 @@ func Document() gin.HandlerFunc {
 		middleware.After(&siwagPath, c)
 		// 获取响应的数据
 		if siwag.IsStatusCodeValid(c.Writer.Status()) {
-
-			//headers := map[string]string{}
-			//for k, v := range c.Writer.Header() {
-			//	log.Println(k, v)
-			//	headers[k] = strings.Join(v, " ")
-			//}
 			siwagPath.Produces = []string{
 				"application/json",
 			}
-			siwagResponses.StatusCodeResponse = map[int]model.Response{
-				c.Writer.Status(): model.Response{
-					Examples: blw.body.String(),
-				},
-
+			var tags []model.Tags
+			tags = append(tags,model.Tags{
+				Name:"default",
+				})
+			siwagPath.Tags = []string{"default"}
+			response := model.Response{
+				Description: blw.body.String(),
 			}
-
-
-			siwagPath.Response = &siwagResponses
-			if c.FullPath() ==""{
-				siwagPath.ID = strings.Replace(c.Request.URL.Path,"/","",10)
-			}else {
-				siwagPath.ID = strings.Replace(c.FullPath(),"/","",10)
+			responsec := map[int]model.Response{
+				c.Writer.Status(): response,
 			}
-			siwagPathItems[c.Request.Method] = siwagPath
+			siwagPath.Responses = responsec
+			//if c.FullPath() ==""{
+			//	siwagPath.ID = strings.Replace(c.Request.URL.Path,"/","",10)
+			//}else {
+			//	siwagPath.ID = strings.Replace(c.FullPath(),"/","",10)
+			//}
+			siwagPathItems[strings.ToLower(c.Request.Method)] = siwagPath
 
 			if c.FullPath() == "" {
 				siwagPaths[c.Request.URL.Path] = siwagPathItems
@@ -66,6 +62,8 @@ func Document() gin.HandlerFunc {
 				siwagPaths[c.FullPath()] = siwagPathItems
 
 			}
+			siwagPath.Schemes = []string{"http","https"}
+			siwag.InitInfo.Tags = &tags
 
 			// 存储文件里面
 			siwag.InitInfo.Paths = siwagPaths

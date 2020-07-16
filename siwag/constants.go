@@ -18,24 +18,33 @@ func init() {
 		Email: "",
 		URL:   "",
 	}
+	License := spec.License{
+		Name: "Apache 2.0",
+		URL: "http://www.apache.org/licenses/LICENSE-2.0.html",
+	}
 	InfoBasic = spec.InfoProps{
 		Description:    "you think this info",
 		Version:        "1.0.0",
 		Title:          "you think this title",
 		TermsOfService: "",
 		Contact:        &Contact,
+		License: &License,
 	}
+
 	info := spec.Info{
 		InfoProps: InfoBasic,
+
 	}
+	securitySchemeProps := spec.SecuritySchemeProps{}
 	InitInfo = model.Base{
 		Swagger:  "2.0",
 		Info:     &info,
 		Host:     "localhost:8081",
 		BasePath: "/",
-		//Tags: TODO 1. 自动根据path抽取，或者手动添加
-		//Schemes: spec.Schema{}  TODO 暂时不写
-		//SecurityDefinitions:  TODO 暂时不写
+		//Tags:
+		Schemes:  []string{"https",
+			"http"},
+		SecurityDefinitions:  &securitySchemeProps,
 		//Definitions:
 		//ExternalDocs: TODO 暂时不写
 	}

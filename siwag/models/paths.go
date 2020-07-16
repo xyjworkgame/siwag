@@ -8,43 +8,48 @@ import (
 // 尝试查看调用方法，反射url路径
 type Paths map[string]PathItems
 type PathItems map[string]Path
+type BodyParameters []BodyParameter
+type QueryParameters []BodyParameter
 type Parameters []Parameter
+
 // Path 是一个字典，url -》 {}
 type Path struct {
-	Description string   // 描述
-	Consumes    []string //
-	Produces    []string //
-	Schemes     []string
-	Tags        []string //手动添加
-	Summary     string
-	ID          string
-	Deprecated  bool
-	Parameters  Parameters
-	Response    *Responses
+	Description string           `json:"description"`
+	Consumes    []string         `json:"consumes"`
+	Produces    []string         `json:"produces"`
+	Schemes     []string         `json:"schemes"`
+	Tags        []string         `json:"tags"`
+	Summary     string           `json:"summary"`
+	//ID          string           `json:"id"`
+	Deprecated  bool             `json:"deprecated"`
+	Parameters  Parameters       `json:"parameters"`
+	Responses   map[int]Response `json:"responses"`
 }
-
 type Parameter struct {
-	Description     string
-	Name            string
-	In              string
-	Type            string
-	Required        bool
-	Schema          *Schema //关于spec 全部 手动输入，
-	AllowEmptyValue bool
+	BodyParameter
+	QueryParameter
+}
+type QueryParameter struct {
+	In              string `json:"in"`
+	Name            string `json:"name"`
+	Type            string `json:"type"`
+	Required        bool   `json:"required"`
+	AllowEmptyValue bool   `json:"allowEmptyValue"`
+	Description     string `json:"description"`
+}
+type BodyParameter struct {
+	In              string `json:"in"`
+	Name            string `json:"name"`
+	Required        bool   `json:"required"`
+	AllowEmptyValue bool   `json:"allowEmptyValue"`
+	Description     string `json:"description"`
 }
 type Schema struct {
-	Type string
-	Item *spec.Items
-	Example string
-}
-type Responses struct {
-	Default            *Response
-	StatusCodeResponse map[int]Response
+	Type        string      `json:"type"`
+	Item        *spec.Items `json:"item"`
+	Description string      `json:"description"`
 }
 
 type Response struct {
-	Description string
-	Schema      *spec.Schema
-	Headers     map[string]string
-	Examples    string
+	Description string `json:"description"`
 }

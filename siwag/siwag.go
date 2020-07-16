@@ -179,13 +179,15 @@ func compareInitInfo(nInfo *models.Base, oInfo *models.Base) {
 					// compare parameter
 					parameters := compareParameters(nInfo.Paths[pathItemsk][pathk].Parameters,pathv.Parameters)
 					//nInfo.Paths[pathItemsk][pathk].Parameters = parameters
-					log.Println(parameters)
+					//log.Println(parameters)
 					// FIXME 为了map值的正确，go语言不允许直接修改map中的值类型结构。
 					// 怎么可以让这句话，添加一个伪遍历
 					for k,_ := range nInfo.Paths{
 						if k == pathItemsk{
 							for _,v1 := range nInfo.Paths[pathItemsk]{
+								log.Println(parameters)
 								v1.Parameters = parameters
+								log.Println(v1.Parameters)
 							}
 						}
 					}
@@ -218,42 +220,23 @@ func compareParameters(parameters models.Parameters, oldP models.Parameters) []m
 	var result []models.Parameter
 	nameMap := map[string]models.Parameter{}
 	for _, v := range parameters {
-		if _, ok := nameMap[v.BodyParameter.Name]; !ok {
+		if _, ok := nameMap[v.Name]; !ok {
 			//	name存在，
 			//	result = append(result, v)
-			nameMap[v.BodyParameter.Name] = v
+			nameMap[v.Name] = v
 		}
 
 	}
 	for _, v := range oldP {
-		if _, ok := nameMap[v.BodyParameter.Name]; !ok {
+		if _, ok := nameMap[v.Name]; !ok {
 			//	如果没有，则设置required
-			v.BodyParameter.Required = false
-			nameMap[v.BodyParameter.Name] = v
+			v.Required = false
+			nameMap[v.Name] = v
 		}
 	}
 	for _, v := range nameMap {
 		result = append(result, v)
 	}
 
-	// query
-	for _, v := range parameters {
-		if _, ok := nameMap[v.QueryParameter.Name]; !ok {
-			//	name存在，
-			//	result = append(result, v)
-			nameMap[v.QueryParameter.Name] = v
-		}
-
-	}
-	for _, v := range oldP {
-		if _, ok := nameMap[v.QueryParameter.Name]; !ok {
-			//	如果没有，则设置required
-			v.QueryParameter.Required = false
-			nameMap[v.QueryParameter.Name] = v
-		}
-	}
-	for _, v := range nameMap {
-		result = append(result, v)
-	}
 	return result
 }

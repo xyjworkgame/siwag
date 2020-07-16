@@ -48,11 +48,7 @@ func Document() gin.HandlerFunc {
 				c.Writer.Status(): response,
 			}
 			siwagPath.Responses = responsec
-			//if c.FullPath() ==""{
-			//	siwagPath.ID = strings.Replace(c.Request.URL.Path,"/","",10)
-			//}else {
-			//	siwagPath.ID = strings.Replace(c.FullPath(),"/","",10)
-			//}
+
 			siwagPathItems[strings.ToLower(c.Request.Method)] = siwagPath
 
 			if c.FullPath() == "" {

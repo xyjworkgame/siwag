@@ -24,3 +24,4 @@ config := siwag.Config{
 3. 缺点： 
     1. 对于params 的参数，无法区别出来是什么数据，后端得到的数据都是字符串
     2. tag 标签还没有优化
+    3. body 参数的type 无法很好的取消掉（没有很好的struct支持）

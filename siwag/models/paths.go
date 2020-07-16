@@ -14,21 +14,18 @@ type Parameters []Parameter
 
 // Path 是一个字典，url -》 {}
 type Path struct {
-	Description string           `json:"description"`
-	Consumes    []string         `json:"consumes"`
-	Produces    []string         `json:"produces"`
-	Schemes     []string         `json:"schemes"`
-	Tags        []string         `json:"tags"`
-	Summary     string           `json:"summary"`
+	Description string   `json:"description"`
+	Consumes    []string `json:"consumes"`
+	Produces    []string `json:"produces"`
+	Schemes     []string `json:"schemes"`
+	Tags        []string `json:"tags"`
+	Summary     string   `json:"summary"`
 	//ID          string           `json:"id"`
-	Deprecated  bool             `json:"deprecated"`
-	Parameters  Parameters       `json:"parameters"`
-	Responses   map[int]Response `json:"responses"`
+	Deprecated bool             `json:"deprecated"`
+	Parameters Parameters       `json:"parameters"`
+	Responses  map[int]Response `json:"responses"`
 }
-type Parameter struct {
-	BodyParameter
-	QueryParameter
-}
+
 type QueryParameter struct {
 	In              string `json:"in"`
 	Name            string `json:"name"`
@@ -41,6 +38,14 @@ type BodyParameter struct {
 	In              string `json:"in"`
 	Name            string `json:"name"`
 	Required        bool   `json:"required"`
+	AllowEmptyValue bool   `json:"allowEmptyValue"`
+	Description     string `json:"description"`
+}
+type Parameter struct {
+	In              string `json:"in"`
+	Name            string `json:"name"`
+	Required        bool   `json:"required"`
+	Type            string `json:"type"`
 	AllowEmptyValue bool   `json:"allowEmptyValue"`
 	Description     string `json:"description"`
 }

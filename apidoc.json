@@ -27,10 +27,10 @@
   ],
   "paths": {
     "/json": {
-      "get": {
+      "post": {
         "description": "",
         "consumes": [
-          "application/json"
+          "application/x-www-form-urlencoded"
         ],
         "produces": [
           "application/json"
@@ -43,12 +43,25 @@
         "deprecated": false,
         "parameters": [
           {
-            "type": ""
+            "in": "path",
+            "name": "cesa",
+            "required": true,
+            "type": "",
+            "allowEmptyValue": false,
+            "description": "{\"aaa\":\"2,3,4\",\"cesa\":\"1,2,2,2,2\"}"
+          },
+          {
+            "in": "path",
+            "name": "aaa",
+            "required": true,
+            "type": "",
+            "allowEmptyValue": false,
+            "description": "{\"aaa\":\"2,3,4\",\"cesa\":\"1,2,2,2,2\"}"
           }
         ],
         "responses": {
           "200": {
-            "description": "{\"result\":\"Hello World!\"}"
+            "description": "1,2,2,2,2"
           }
         }
       }

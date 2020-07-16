@@ -38,12 +38,12 @@ func After(siwagCall *model.Path, c *gin.Context) {
 			bodyResult := ReadBodyParams(c)
 			for k, _ := range bodyResult {
 				parameter := model.Parameter{}
-				parameter.BodyParameter.Name = k
-				parameter.BodyParameter.Name = k
-				parameter.BodyParameter.In = "path"
-				parameter.BodyParameter.Required = true
+				parameter.Name = k
+				parameter.Name = k
+				parameter.In = "path"
+				parameter.Required = true
 				jsonStr, _ := json.Marshal(bodyResult)
-				parameter.BodyParameter.Description = string(jsonStr)
+				parameter.Description = string(jsonStr)
 				//log.Println(parameter.Type)
 
 				siwagCall.Parameters = append(siwagCall.Parameters, parameter)
@@ -60,11 +60,11 @@ func After(siwagCall *model.Path, c *gin.Context) {
 			}
 			for k, _ := range mapResult {
 				parameter := model.Parameter{}
-				parameter.BodyParameter.In = "body"
-				parameter.BodyParameter.Required = true
-				parameter.BodyParameter.Name = k
-				//parameter.BodyParameter.Type = reflect.TypeOf(v).String()
-				//parameter.BodyParameter.Description =
+				parameter.In = "body"
+				parameter.Required = true
+				parameter.Name = k
+				//parameter.Parameter.Type = reflect.TypeOf(v).String()
+				//parameter.Parameter.Description =
 				siwagCall.Parameters = append(siwagCall.Parameters, parameter)
 			}
 
@@ -92,14 +92,14 @@ func Before(siwagCall *model.Path, c *gin.Context) {
 	// 遍历添加数据
 	for k, v := range queryResult {
 		parameter := model.Parameter{}
-		parameter.QueryParameter.Name = k
-		parameter.QueryParameter.In = "query"
-		parameter.QueryParameter.Required = true
+		parameter.Name = k
+		parameter.In = "query"
+		parameter.Required = true
 		//	TODO 这里有可能无法实现添加参数类型，因为得到的都是字符串，除非通过转换切换
 		//log.Println(reflect.ValueOf(v).String())
 		parameter.Type = reflect.TypeOf(v).String()
 		jsonStr, _ := json.Marshal(queryResult)
-		parameter.QueryParameter.Description = string(jsonStr)
+		parameter.Description = string(jsonStr)
 
 		// 添加进去
 		siwagCall.Parameters = append(siwagCall.Parameters, parameter)
@@ -109,9 +109,9 @@ func Before(siwagCall *model.Path, c *gin.Context) {
 	pathResult := ReadPathParams(c)
 	for k, v := range pathResult {
 		parameter := model.Parameter{}
-		parameter.QueryParameter.Name = k
-		parameter.QueryParameter.In = "path"
-		parameter.QueryParameter.Required = true
+		parameter.Name = k
+		parameter.In = "path"
+		parameter.Required = true
 		parameter.Type = reflect.ValueOf(v).String()
 		//log.Println(parameter.Type)
 
@@ -166,9 +166,9 @@ func handleMultipart(siwagCall *model.Path, req *http.Request) {
 	for k, _ := range postForm {
 		parameter := model.Parameter{}
 
-		parameter.BodyParameter.Name = k
-		parameter.BodyParameter.Required = true
-		parameter.BodyParameter.In = "body"
+		parameter.Name = k
+		parameter.Required = true
+		parameter.In = "body"
 		siwagCall.Parameters = append(siwagCall.Parameters, parameter)
 	}
 
